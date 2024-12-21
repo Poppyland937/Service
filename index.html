@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Services Platform</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="branding">
+        <h1>Name</h1>
+      </div>
+      <nav class="navigation">
+        <ul>
+          <li><a href="#services">Sign In</a></li>
+          <li><a href="#how-it-works">Register</a></li>
+          <li><a href="#testimonials">Services</a></li>
+          <li><a href="#testimonials">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>
+        Quick, Reliable, Local<br />
+        Services at Your Fingertips
+      </h1>
+      <p>
+        Connect with trusted local workers for one-time jobs<br />
+        in your area. Reliable. Fast. Easy.
+      </p>
+      <div class="search-bar">
+        <input type="text" placeholder="Enter your postcode" />
+      </div>
+      <button>Find a Worker</button>
+      <button>Sign Up as a Worker</button>
+    </section>
+
+    <section id="services" class="services">
+      <h2>Our Services</h2>
+      <div class="search-bars">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for services..."
+          autocomplete="off"
+        />
+        <div class="dropdown" id="dropdownSuggestions"></div>
+      </div>
+
+      <h3>Our Popular Services</h3>
+      <div class="service-grid">
+        <div class="service-card">
+          <h3>Cleaning</h3>
+        </div>
+        <div class="service-card">
+          <h3>Gardening</h3>
+        </div>
+        <div class="service-card">
+          <h3>Handyman</h3>
+        </div>
+        <div class="service-card">
+          <h3>Babysitting</h3>
+        </div>
+        <div class="service-card">
+          <h3>Pet Sitting</h3>
+        </div>
+        <div class="service-card">
+          <h3>Plumbing</h3>
+        </div>
+        <div class="service-card">
+          <h3>Electrician</h3>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2>How It Works in 3 Simple Steps</h2>
+      <div class="steps">
+        <div class="step">
+          <img src="images/icon1.png" alt="Search Icon" />
+          <p>Search for services in your area.</p>
+        </div>
+        <div class="step">
+          <img src="images/icon2.png" alt="Calendar Icon" />
+          <p>Book the best worker for the job.</p>
+        </div>
+        <div class="step">
+          <img src="images/icon3.png" alt="Checkmark Icon" />
+          <p>Get it done, hassle-free.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Get Started Today!</h2>
+      <button>Sign Up Now</button>
+      <button>Book a Service</button>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Local Services Platform. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Help Centre</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <div class="social-media">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </footer>
+    <script>
+      const searchInput = document.getElementById("searchInput");
+      const dropdown = document.getElementById("dropdownSuggestions");
+
+      const services = [
+        "Cleaning",
+        "Gardening",
+        "Plumbing",
+        "Painting",
+        "Electrical Repairs",
+        "Carpentry",
+        "Landscaping",
+        "Deep Cleaning",
+        "Window Washing",
+        "Handyman Services",
+        "Pet Sitting",
+        "BabySitting",
+      ];
+
+      searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase();
+        dropdown.innerHTML = "";
+
+        if (query) {
+          const filteredServices = services.filter((service) =>
+            service.toLowerCase().includes(query)
+          );
+
+          if (filteredServices.length > 0) {
+            dropdown.style.display = "block";
+            filteredServices.forEach((service) => {
+              const suggestionDiv = document.createElement("div");
+              suggestionDiv.classList.add("suggestion");
+              suggestionDiv.textContent = service;
+
+              suggestionDiv.addEventListener("click", () => {
+                searchInput.value = service;
+                dropdown.style.display = "none";
+              });
+
+              dropdown.appendChild(suggestionDiv);
+            });
+          } else {
+            dropdown.style.display = "none";
+          }
+        } else {
+          dropdown.style.display = "none";
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-bar")) {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
